@@ -59,17 +59,17 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButton(0)) // ¸¶¿ì½º·Î ¿òÁ÷ÀÌ´Â ÄÚµå ¹× ¾Ö´Ï¸ÞÀÌ¼Ç ÀÛµ¿
+        if (Input.GetMouseButton(0)) // ï¿½ï¿½ï¿½ì½ºï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½Úµï¿½ ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ûµï¿½
         {
             float mousePositionX = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
             float direction = Mathf.Sign(mousePositionX - transform.position.x);
-            rigidbody.velocity = new Vector2(direction * speed, rigidbody.velocity.y);
+            rigidbody.linearVelocity = new Vector2(direction * speed, rigidbody.linearVelocity.y);
             animator.SetFloat("Speed", Mathf.Abs(direction));
             renderer.flipX = direction < 0;
         }
         else
         {
-            rigidbody.velocity = new Vector2(0f, rigidbody.velocity.y);
+            rigidbody.linearVelocity = new Vector2(0f, rigidbody.linearVelocity.y);
             animator.SetFloat("Speed", 0f);
         }
     }
@@ -77,15 +77,15 @@ public class Player : MonoBehaviour
     {
         angelbust();
         yield return new WaitForSeconds(shieldTime);
-        // ¹æÆÐ ºñÈ°¼ºÈ­ ·ÎÁ÷À» Ãß°¡ÇÒ ¼ö ÀÖÀ½
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         angelstart();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // ¹æÆÐ°¡ È°¼ºÈ­µÈ »óÅÂ¿¡¼­¸¸ Ãæµ¹ Ã³¸®
+        // ï¿½ï¿½ï¿½Ð°ï¿½ È°ï¿½ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½Â¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹ Ã³ï¿½ï¿½
         if (isShieldActive && collision.CompareTag("Enemy"))
         {
-            Destroy(collision.gameObject);  // Àû Á¦°Å
+            Destroy(collision.gameObject);  // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         }
     }
     
